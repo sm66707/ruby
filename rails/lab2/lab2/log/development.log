@@ -1,0 +1,2053 @@
+  [1m[35m (25.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (62.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (46.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20220701162519)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "role_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_642f17018b"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_users_on_role_id" ON "users" ("role_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220701162519"]]
+  [1m[36mTRANSACTION (58.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRoles (20220701162715)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220701162715"]]
+  [1m[36mTRANSACTION (36.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateBooks (20220701163013)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "books" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "image" varchar, "price" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_bc582ddd02"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_books_on_user_id" ON "books" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220701163013"]]
+  [1m[36mTRANSACTION (44.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-07-01 16:31:31.014545"], ["updated_at", "2022-07-01 16:31:31.014545"]]
+  [1m[36mTRANSACTION (42.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2022-07-01 18:57:21 +0200
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/railties-7.0.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/railties-7.0.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 50.3ms | Allocations: 762)
+Completed 200 OK in 238ms (Views: 105.8ms | ActiveRecord: 0.0ms | Allocations: 6155)
+
+
+Started GET "/roles" for 127.0.0.1 at 2022-07-01 18:57:32 +0200
+Processing by RolesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering roles/index.html.erb within layouts/application
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/roles/index.html.erb:5
+  Rendered roles/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1259)
+  Rendered layout layouts/application.html.erb (Duration: 557.9ms | Allocations: 75628)
+Completed 500 Internal Server Error in 581ms (ActiveRecord: 0.4ms | Allocations: 78026)
+
+
+  
+ActionView::Template::Error (Permission denied @ rb_file_s_rename - (D:/rails/Rails/lab2/tmp/cache/assets/sprockets/v4.0.0/CG/CGooA4kn1RtDAhDNCoyH9KFdcBgsnkVyjSachv6cz0c.cache.12090.19264.814024, D:/rails/Rails/lab2/tmp/cache/assets/sprockets/v4.0.0/CG/CGooA4kn1RtDAhDNCoyH9KFdcBgsnkVyjSachv6cz0c.cache)):
+  
+sprockets (4.0.3) lib/sprockets/path_utils.rb:362:in `rename'
+sprockets (4.0.3) lib/sprockets/path_utils.rb:362:in `atomic_write'
+sprockets (4.0.3) lib/sprockets/cache/file_store.rb:112:in `set'
+sprockets (4.0.3) lib/sprockets/cache.rb:227:in `set'
+sprockets (4.0.3) lib/sprockets/cache.rb:143:in `set'
+sprockets (4.0.3) lib/sprockets/loader.rb:341:in `fetch_asset_from_dependency_cache'
+sprockets (4.0.3) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.0.3) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.0.3) lib/sprockets/bundle.rb:32:in `block in call'
+C:/Ruby31/lib/ruby/3.1.0/set.rb:511:in `each_key'
+C:/Ruby31/lib/ruby/3.1.0/set.rb:511:in `each'
+sprockets (4.0.3) lib/sprockets/bundle.rb:31:in `call'
+sprockets (4.0.3) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.0.3) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.0.3) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.0.3) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.0.3) lib/sprockets/loader.rb:182:in `load_from_unloaded'
+sprockets (4.0.3) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.0.3) lib/sprockets/loader.rb:337:in `fetch_asset_from_dependency_cache'
+sprockets (4.0.3) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.0.3) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.0.3) lib/sprockets/base.rb:81:in `find_asset'
+sprockets (4.0.3) lib/sprockets/base.rb:88:in `find_all_linked_assets'
+sprockets (4.0.3) lib/sprockets/manifest.rb:125:in `each'
+sprockets (4.0.3) lib/sprockets/manifest.rb:125:in `to_a'
+sprockets (4.0.3) lib/sprockets/manifest.rb:125:in `block (2 levels) in find'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `block in synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/promise.rb:564:in `block in realize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+Started GET "/roles/new" for 127.0.0.1 at 2022-07-01 18:57:55 +0200
+Processing by RolesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering roles/new.html.erb within layouts/application
+  Rendered roles/_form.html.erb (Duration: 193.5ms | Allocations: 5656)
+  Rendered roles/new.html.erb within layouts/application (Duration: 197.2ms | Allocations: 6072)
+  Rendered layout layouts/application.html.erb (Duration: 356.8ms | Allocations: 40137)
+Completed 200 OK in 522ms (Views: 359.1ms | ActiveRecord: 1.5ms | Allocations: 54004)
+
+
+Started GET "/user/new" for 127.0.0.1 at 2022-07-01 18:58:05 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/user/new"):
+  
+Started GET "/users/new" for 127.0.0.1 at 2022-07-01 18:58:24 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 1.4ms | Allocations: 1487)
+  Rendered users/new.html.erb within layouts/application (Duration: 4.6ms | Allocations: 1882)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | Allocations: 2060)
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 1.0ms | Allocations: 6787)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,
+        {prompt:true}
+    ) %>%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: user) do |form| %>
+2:      <% if user.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% user.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :name, style: "display: block" %>
+16:        <%= form.text_field :name %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,
+21:            {prompt:true}
+22:        ) %>%>
+23:      </div>
+24:    
+25:      <div>
+26:        <%= form.submit %>
+27:      </div>
+28:    <% end %>
+  
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/new.html.erb:3
+Started GET "/users/new" for 127.0.0.1 at 2022-07-01 18:59:14 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.7ms | Allocations: 1477)
+  Rendered users/new.html.erb within layouts/application (Duration: 2.3ms | Allocations: 1842)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | Allocations: 1953)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms | Allocations: 2860)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,
+        {prompt:true}
+    ) %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: user) do |form| %>
+2:      <% if user.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% user.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :name, style: "display: block" %>
+16:        <%= form.text_field :name %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,
+21:            {prompt:true}
+22:        ) %>
+23:      </div>
+24:    
+25:      <div>
+26:        <%= form.submit %>
+27:      </div>
+28:    <% end %>
+  
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:30: syntax error, unexpected `end', expecting ')'
+app/views/users/new.html.erb:3
+Started GET "/users/new" for 127.0.0.1 at 2022-07-01 18:59:33 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 1.0ms | Allocations: 1475)
+  Rendered users/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1840)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 1951)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms | Allocations: 2854)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,{prompt:true}) %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: user) do |form| %>
+2:      <% if user.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% user.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :name, style: "display: block" %>
+16:        <%= form.text_field :name %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= <%= collection_select(:user, :role_id, Role.all, :id, :name,{prompt:true}) %>
+21:      </div>
+22:    
+23:      <div>
+24:        <%= form.submit %>
+25:      </div>
+26:    <% end %>
+  
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:20: syntax error, unexpected '<'
+app/views/users/_form.html.erb:26: syntax error, unexpected `end', expecting ')'
+app/views/users/_form.html.erb:28: syntax error, unexpected `end', expecting ')'
+app/views/users/new.html.erb:3
+Started GET "/users/new" for 127.0.0.1 at 2022-07-01 18:59:57 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:20
+  Rendered users/_form.html.erb (Duration: 181.2ms | Allocations: 14811)
+  Rendered users/new.html.erb within layouts/application (Duration: 184.4ms | Allocations: 15229)
+  Rendered layout layouts/application.html.erb (Duration: 198.2ms | Allocations: 18139)
+Completed 200 OK in 210ms (Views: 205.1ms | ActiveRecord: 0.3ms | Allocations: 19094)
+
+
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddDeviseToUsers (20220701191956)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" datetime(6)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" datetime(6)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220701191956"]]
+  [1m[36mTRANSACTION (83.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Regular"], ["description", "Can read items"], ["created_at", "2022-07-01 20:04:28.075820"], ["updated_at", "2022-07-01 20:04:28.075820"]]
+  [1m[36mTRANSACTION (45.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Seller"], ["description", "Can read and create items. Can update and destroy own items"], ["created_at", "2022-07-01 20:04:28.125044"], ["updated_at", "2022-07-01 20:04:28.125044"]]
+  [1m[36mTRANSACTION (129.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Admin"], ["description", "Can perform any CRUD operation on any resource"], ["created_at", "2022-07-01 20:04:28.260966"], ["updated_at", "2022-07-01 20:04:28.260966"]]
+  [1m[36mTRANSACTION (28.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "role_id", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Sally"], ["role_id", 1], ["created_at", "2022-07-01 20:04:28.736449"], ["updated_at", "2022-07-01 20:04:28.736449"], ["email", "sally@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sue@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "role_id", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Sue"], ["role_id", 2], ["created_at", "2022-07-01 20:04:29.049707"], ["updated_at", "2022-07-01 20:04:29.049707"], ["email", "sue@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mTRANSACTION (57.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "kev@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "role_id", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kev"], ["role_id", 2], ["created_at", "2022-07-01 20:04:29.342259"], ["updated_at", "2022-07-01 20:04:29.342259"], ["email", "kev@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mTRANSACTION (45.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jack@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "role_id", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Jack"], ["role_id", 3], ["created_at", "2022-07-01 20:04:29.622916"], ["updated_at", "2022-07-01 20:04:29.622916"], ["email", "jack@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mTRANSACTION (54.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mBook Create (0.7ms)[0m  [1m[32mINSERT INTO "books" ("name", "description", "image", "price", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Rayban Sunglasses"], ["description", "Stylish shades"], ["image", "image"], ["price", 99], ["user_id", 2], ["created_at", "2022-07-01 20:04:29.698131"], ["updated_at", "2022-07-01 20:04:29.698131"]]
+  [1m[36mTRANSACTION (37.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mBook Create (0.9ms)[0m  [1m[32mINSERT INTO "books" ("name", "description", "image", "price", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Gucci watch"], ["description", "Expensive timepiece"], ["image", "image"], ["price", 199], ["user_id", 2], ["created_at", "2022-07-01 20:04:29.741787"], ["updated_at", "2022-07-01 20:04:29.741787"]]
+  [1m[36mTRANSACTION (29.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBook Create (0.8ms)[0m  [1m[32mINSERT INTO "books" ("name", "description", "image", "price", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Henri Lloyd Pullover"], ["description", "Classy knitwear"], ["image", "image"], ["price", 299], ["user_id", 3], ["created_at", "2022-07-01 20:04:29.779826"], ["updated_at", "2022-07-01 20:04:29.779826"]]
+  [1m[36mTRANSACTION (37.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBook Create (1.4ms)[0m  [1m[32mINSERT INTO "books" ("name", "description", "image", "price", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Porsche socks"], ["description", "Cosy footwear"], ["image", "image"], ["price", 399], ["user_id", 3], ["created_at", "2022-07-01 20:04:29.825972"], ["updated_at", "2022-07-01 20:04:29.825972"]]
+  [1m[36mTRANSACTION (35.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Regular"], ["description", "Can read items"], ["created_at", "2022-07-01 20:05:34.629712"], ["updated_at", "2022-07-01 20:05:34.629712"]]
+  [1m[36mTRANSACTION (67.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Seller"], ["description", "Can read and create items. Can update and destroy own items"], ["created_at", "2022-07-01 20:05:34.702434"], ["updated_at", "2022-07-01 20:05:34.702434"]]
+  [1m[36mTRANSACTION (39.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Admin"], ["description", "Can perform any CRUD operation on any resource"], ["created_at", "2022-07-01 20:05:34.748700"], ["updated_at", "2022-07-01 20:05:34.748700"]]
+  [1m[36mTRANSACTION (38.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sue@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "kev@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jack@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:07:02 +0200
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BooksController#index as HTML
+Completed 401 Unauthorized in 27ms (ActiveRecord: 0.0ms | Allocations: 3657)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-01 22:07:02 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 1.8ms | Allocations: 893)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 105.5ms | Allocations: 5040)
+  Rendered layout layouts/application.html.erb (Duration: 350.1ms | Allocations: 42241)
+Completed 200 OK in 482ms (Views: 456.4ms | ActiveRecord: 0.9ms | Allocations: 52885)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-01 22:08:05 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sally@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 338ms (ActiveRecord: 0.8ms | Allocations: 6441)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:08:05 +0200
+Processing by BooksController#index as TURBO_STREAM
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 14.9ms | Allocations: 4506)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.0ms | Allocations: 745)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.2ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.6ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 75.2ms | Allocations: 12832)
+  Rendered layout layouts/application.html.erb (Duration: 83.5ms | Allocations: 15671)
+Completed 200 OK in 101ms (Views: 87.0ms | ActiveRecord: 2.5ms | Allocations: 19079)
+
+
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Regular"], ["description", "Can read items"], ["created_at", "2022-07-01 20:09:25.228736"], ["updated_at", "2022-07-01 20:09:25.228736"]]
+  [1m[36mTRANSACTION (241.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (95.7ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Seller"], ["description", "Can read and create items. Can update and destroy own items"], ["created_at", "2022-07-01 20:09:25.477153"], ["updated_at", "2022-07-01 20:09:25.477153"]]
+  [1m[36mTRANSACTION (44.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRole Create (1.4ms)[0m  [1m[32mINSERT INTO "roles" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Admin"], ["description", "Can perform any CRUD operation on any resource"], ["created_at", "2022-07-01 20:09:25.623102"], ["updated_at", "2022-07-01 20:09:25.623102"]]
+  [1m[36mTRANSACTION (38.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sue@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "kev@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jack@example.com"], ["LIMIT", 1]]
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:09:39 +0200
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 13.2ms | Allocations: 4463)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.9ms | Allocations: 746)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.8ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.9ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 39.9ms | Allocations: 13010)
+  Rendered layout layouts/application.html.erb (Duration: 224.3ms | Allocations: 50959)
+Completed 200 OK in 283ms (Views: 232.4ms | ActiveRecord: 2.8ms | Allocations: 67074)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-01 22:09:43 +0200
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 21ms (ActiveRecord: 0.3ms | Allocations: 3372)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:09:43 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.5ms | Allocations: 788)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 6.1ms | Allocations: 717)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 6.4ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 5.1ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 31.8ms | Allocations: 4225)
+  Rendered layout layouts/application.html.erb (Duration: 46.3ms | Allocations: 6875)
+Completed 200 OK in 58ms (Views: 47.9ms | ActiveRecord: 1.5ms | Allocations: 8642)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-01 22:09:49 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"sign_out"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:64:in `set_user'
+Completed 404 Not Found in 7ms (ActiveRecord: 0.2ms | Allocations: 1778)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=sign_out):
+  
+app/controllers/users_controller.rb:64:in `set_user'
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:09:53 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.6ms | Allocations: 787)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.8ms | Allocations: 717)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.4ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.8ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 30.3ms | Allocations: 4226)
+  Rendered layout layouts/application.html.erb (Duration: 43.4ms | Allocations: 6867)
+Completed 200 OK in 55ms (Views: 45.0ms | ActiveRecord: 1.3ms | Allocations: 8784)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:09:55 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.5ms | Allocations: 762)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.1ms | Allocations: 716)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 6.0ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.1ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 25.7ms | Allocations: 4157)
+  Rendered layout layouts/application.html.erb (Duration: 40.4ms | Allocations: 6665)
+Completed 200 OK in 50ms (Views: 42.0ms | ActiveRecord: 1.3ms | Allocations: 8354)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:10:29 +0200
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 12.7ms | Allocations: 4463)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.4ms | Allocations: 746)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.5ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 1.9ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 33.5ms | Allocations: 13010)
+  Rendered layout layouts/application.html.erb (Duration: 166.6ms | Allocations: 50943)
+Completed 200 OK in 216ms (Views: 173.5ms | ActiveRecord: 2.9ms | Allocations: 67068)
+
+
+Started GET "/books/1" for 127.0.0.1 at 2022-07-01 22:10:43 +0200
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:64:in `set_book'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.8ms | Allocations: 784)
+  Rendered books/show.html.erb within layouts/application (Duration: 8.4ms | Allocations: 1541)
+  Rendered layout layouts/application.html.erb (Duration: 21.6ms | Allocations: 4149)
+Completed 200 OK in 38ms (Views: 23.0ms | ActiveRecord: 1.2ms | Allocations: 7398)
+
+
+Started GET "/books/1/edit" for 127.0.0.1 at 2022-07-01 22:10:46 +0200
+Processing by BooksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:64:in `set_book'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/edit.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 108.1ms | Allocations: 4580)
+  Rendered books/edit.html.erb within layouts/application (Duration: 112.3ms | Allocations: 5037)
+  Rendered layout layouts/application.html.erb (Duration: 126.5ms | Allocations: 7660)
+Completed 200 OK in 141ms (Views: 129.1ms | ActiveRecord: 0.5ms | Allocations: 9959)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-01 22:13:25 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"sign_out"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:64:in `set_user'
+Completed 404 Not Found in 5ms (ActiveRecord: 0.2ms | Allocations: 1713)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=sign_out):
+  
+app/controllers/users_controller.rb:64:in `set_user'
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-01 22:14:12 +0200
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 48ms (ActiveRecord: 0.8ms | Allocations: 15189)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:14:12 +0200
+Processing by BooksController#index as HTML
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 623)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-01 22:14:12 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 893)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 22.4ms | Allocations: 4636)
+  Rendered layout layouts/application.html.erb (Duration: 163.0ms | Allocations: 42437)
+Completed 200 OK in 189ms (Views: 184.2ms | ActiveRecord: 0.0ms | Allocations: 45940)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-01 22:25:23 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sally@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 758ms (ActiveRecord: 1.3ms | Allocations: 9206)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-01 22:25:26 +0200
+Processing by BooksController#index as TURBO_STREAM
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 32.3ms | Allocations: 4508)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 7.2ms | Allocations: 745)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.6ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.6ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 88.0ms | Allocations: 12723)
+  Rendered layout layouts/application.html.erb (Duration: 154.7ms | Allocations: 27411)
+Completed 200 OK in 189ms (Views: 163.5ms | ActiveRecord: 4.8ms | Allocations: 30888)
+
+
+Started GET "/books/1" for 127.0.0.1 at 2022-07-01 22:25:29 +0200
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:64:in `set_book'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 5.8ms | Allocations: 759)
+  Rendered books/show.html.erb within layouts/application (Duration: 9.7ms | Allocations: 1454)
+  Rendered layout layouts/application.html.erb (Duration: 21.5ms | Allocations: 3955)
+Completed 200 OK in 40ms (Views: 23.9ms | ActiveRecord: 1.0ms | Allocations: 7013)
+
+
+Started GET "/books/1/edit" for 127.0.0.1 at 2022-07-01 22:25:30 +0200
+Processing by BooksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:64:in `set_book'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/edit.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 8.0ms | Allocations: 2519)
+  Rendered books/edit.html.erb within layouts/application (Duration: 11.6ms | Allocations: 2969)
+  Rendered layout layouts/application.html.erb (Duration: 23.3ms | Allocations: 5592)
+Completed 200 OK in 38ms (Views: 25.3ms | ActiveRecord: 0.4ms | Allocations: 7906)
+
+
+Started GET "/books" for 127.0.0.1 at 2022-07-01 22:28:02 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.8ms | Allocations: 786)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.2ms | Allocations: 717)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.2ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.5ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 19.0ms | Allocations: 4190)
+  Rendered layout layouts/application.html.erb (Duration: 30.6ms | Allocations: 6715)
+Completed 200 OK in 40ms (Views: 31.7ms | ActiveRecord: 0.9ms | Allocations: 8628)
+
+
+Started GET "/admin/users" for 127.0.0.1 at 2022-07-01 22:28:21 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 11.5ms | Allocations: 4984)
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 5.8ms | Allocations: 759)
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 2.9ms | Allocations: 709)
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 3.5ms | Allocations: 754)
+  Rendered users/index.html.erb within layouts/application (Duration: 34.1ms | Allocations: 9087)
+  Rendered layout layouts/application.html.erb (Duration: 46.3ms | Allocations: 11894)
+Completed 200 OK in 63ms (Views: 51.5ms | ActiveRecord: 3.3ms | Allocations: 14445)
+
+
+Started GET "/admin/users/1" for 127.0.0.1 at 2022-07-01 22:30:54 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:64:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:64:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 6.8ms | Allocations: 4696)
+  Rendered users/show.html.erb within layouts/application (Duration: 9.9ms | Allocations: 5583)
+  Rendered layout layouts/application.html.erb (Duration: 94.7ms | Allocations: 20200)
+Completed 200 OK in 119ms (Views: 96.2ms | ActiveRecord: 2.0ms | Allocations: 29029)
+
+
+Started GET "/admin/users/new" for 127.0.0.1 at 2022-07-01 23:19:49 +0200
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 77.7ms | Allocations: 8482)
+  Rendered users/new.html.erb within layouts/application (Duration: 84.1ms | Allocations: 9223)
+  Rendered layout layouts/application.html.erb (Duration: 268.5ms | Allocations: 47034)
+Completed 200 OK in 333ms (Views: 282.2ms | ActiveRecord: 3.2ms | Allocations: 62382)
+
+
+Started GET "/admin/users/new" for 127.0.0.1 at 2022-07-01 23:40:18 +0200
+Processing by UsersController#new as HTML
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 8.0ms | Allocations: 4529)
+  Rendered users/new.html.erb within layouts/application (Duration: 8.8ms | Allocations: 4700)
+  Rendered layout layouts/application.html.erb (Duration: 32.9ms | Allocations: 19327)
+Completed 200 OK in 47ms (Views: 34.9ms | ActiveRecord: 0.7ms | Allocations: 26711)
+
+
+Started POST "/admin/users" for 127.0.0.1 at 2022-07-01 23:40:39 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x092b4a54>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User", "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 6.4ms | Allocations: 3406)
+  Rendered users/new.html.erb within layouts/application (Duration: 7.0ms | Allocations: 3547)
+  Rendered layout layouts/application.html.erb (Duration: 13.7ms | Allocations: 6161)
+Completed 422 Unprocessable Entity in 401ms (Views: 14.7ms | ActiveRecord: 1.0ms | Allocations: 15743)
+
+
+Started POST "/admin/users" for 127.0.0.1 at 2022-07-01 23:41:15 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x096bdbb4>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User", "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 9.3ms | Allocations: 4188)
+  Rendered users/new.html.erb within layouts/application (Duration: 10.2ms | Allocations: 4321)
+  Rendered layout layouts/application.html.erb (Duration: 21.2ms | Allocations: 6820)
+Completed 422 Unprocessable Entity in 342ms (Views: 22.9ms | ActiveRecord: 0.9ms | Allocations: 11582)
+
+
+Started POST "/admin/users" for 127.0.0.1 at 2022-07-01 23:41:29 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0983c60c>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"rana", "email"=>"ranaehab56@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User", "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 14.6ms | Allocations: 3148)
+  Rendered users/new.html.erb within layouts/application (Duration: 15.5ms | Allocations: 3281)
+  Rendered layout layouts/application.html.erb (Duration: 23.9ms | Allocations: 5796)
+Completed 422 Unprocessable Entity in 393ms (Views: 25.1ms | ActiveRecord: 0.8ms | Allocations: 10437)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-01 23:41:37 +0200
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.1ms | Allocations: 24354)
+
+
+  
+NameError (undefined local variable or method `devise_parameters_sanitizer' for #<Devise::SessionsController:0x00000000009b00>
+
+        devise_parameters_sanitizer.permit(:sign_up, keys: [:name])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  devise_parameter_sanitizer):
+  
+app/controllers/application_controller.rb:8:in `configure_permitted_parameters'
+Started GET "/admin/users/new" for 127.0.0.1 at 2022-07-01 23:41:53 +0200
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 5.1ms | Allocations: 2349)
+  Rendered users/new.html.erb within layouts/application (Duration: 6.3ms | Allocations: 2484)
+  Rendered layout layouts/application.html.erb (Duration: 15.9ms | Allocations: 5113)
+Completed 200 OK in 26ms (Views: 17.6ms | ActiveRecord: 0.5ms | Allocations: 7045)
+
+
+Started POST "/admin/users" for 127.0.0.1 at 2022-07-01 23:42:54 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"ranaa", "email"=>"ranaaa@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0907282c>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"ranaa", "email"=>"ranaaa@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User", "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 8.7ms | Allocations: 3156)
+  Rendered users/new.html.erb within layouts/application (Duration: 9.7ms | Allocations: 3289)
+  Rendered layout layouts/application.html.erb (Duration: 18.7ms | Allocations: 5788)
+Completed 422 Unprocessable Entity in 413ms (Views: 20.0ms | ActiveRecord: 0.8ms | Allocations: 10512)
+
+
+Started GET "/admin/users/new" for 127.0.0.1 at 2022-07-01 23:50:45 +0200
+Processing by UsersController#new as HTML
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 10.3ms | Allocations: 4529)
+  Rendered users/new.html.erb within layouts/application (Duration: 11.1ms | Allocations: 4700)
+  Rendered layout layouts/application.html.erb (Duration: 77.4ms | Allocations: 19358)
+Completed 200 OK in 92ms (Views: 79.5ms | ActiveRecord: 1.0ms | Allocations: 26692)
+
+
+Started POST "/admin/users" for 127.0.0.1 at 2022-07-01 23:51:00 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"salma", "email"=>"s@gmail.com", "password"=>"[FILTERED]", "role_id"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "s@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "role_id", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "salma"], ["role_id", 1], ["created_at", "2022-07-01 21:51:01.405093"], ["updated_at", "2022-07-01 21:51:01.405093"], ["email", "s@gmail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (53.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+Redirected to http://127.0.0.1:3000/admin/users/5
+Completed 302 Found in 558ms (ActiveRecord: 56.5ms | Allocations: 9205)
+
+
+Started GET "/admin/users/5" for 127.0.0.1 at 2022-07-01 23:51:01 +0200
+Processing by UsersController#show as TURBO_STREAM
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:83:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/users/_user.html.erb:9
+  Rendered users/_user.html.erb (Duration: 5.9ms | Allocations: 1117)
+  Rendered users/show.html.erb within layouts/application (Duration: 13.9ms | Allocations: 2295)
+  Rendered layout layouts/application.html.erb (Duration: 28.3ms | Allocations: 4944)
+Completed 200 OK in 43ms (Views: 30.0ms | ActiveRecord: 1.3ms | Allocations: 7974)
+
+
+Started GET "/admin/users/5/edit" for 127.0.0.1 at 2022-07-01 23:51:59 +0200
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:83:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/edit.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/views/users/_form.html.erb:30
+  Rendered users/_form.html.erb (Duration: 7.7ms | Allocations: 2370)
+  Rendered users/edit.html.erb within layouts/application (Duration: 10.1ms | Allocations: 2737)
+  Rendered layout layouts/application.html.erb (Duration: 20.0ms | Allocations: 5237)
+Completed 200 OK in 34ms (Views: 21.5ms | ActiveRecord: 0.8ms | Allocations: 7632)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:23:09 +0200
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 20.4ms | Allocations: 4463)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.6ms | Allocations: 746)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.8ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.1ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 51.3ms | Allocations: 13009)
+  Rendered layout layouts/application.html.erb (Duration: 190.6ms | Allocations: 50906)
+Completed 200 OK in 239ms (Views: 201.0ms | ActiveRecord: 3.3ms | Allocations: 67037)
+
+
+Started GET "/books/1" for 127.0.0.1 at 2022-07-02 00:23:15 +0200
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.8ms | Allocations: 784)
+  Rendered books/show.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1538)
+  Rendered layout layouts/application.html.erb (Duration: 20.4ms | Allocations: 4146)
+Completed 200 OK in 31ms (Views: 22.0ms | ActiveRecord: 0.7ms | Allocations: 7390)
+
+
+Started GET "/books/1/edit" for 127.0.0.1 at 2022-07-02 00:23:20 +0200
+Processing by BooksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 2.0ms | Allocations: 8464)
+
+
+  
+CanCan::AccessDenied (You are not authorized to access this page.):
+  
+app/controllers/books_controller.rb:21:in `edit'
+Started GET "/books/1/edit" for 127.0.0.1 at 2022-07-02 00:26:50 +0200
+Processing by BooksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 63ms (ActiveRecord: 6.2ms | Allocations: 16535)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:26:52 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 6.3ms | Allocations: 2515)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.3ms | Allocations: 717)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.4ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.0ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 22.1ms | Allocations: 6224)
+  Rendered layout layouts/application.html.erb (Duration: 81.7ms | Allocations: 20955)
+Completed 200 OK in 90ms (Views: 81.7ms | ActiveRecord: 1.9ms | Allocations: 23120)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:52:06 +0200
+Processing by BooksController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  Rendered books/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1383)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | Allocations: 1494)
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 1.4ms | Allocations: 9920)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check 
+
+<h1>Books</h1>
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+
+    <td>
+      <% if can? :update, book%>
+      <%= link_to "Edit" ,  edit_book_path(book) %>
+      <% end %>
+    </td>
+
+    <td>
+      <% if can? :destory, book%>
+      <%= link_to "Destroy" ,  method: :delete,
+      data:{ confirm: "are you sure? "} %>
+      <% end %>
+    </td>
+    <p>
+      <%= link_to "Show this book", book %>
+    </p>
+  <% end %>
+</div>
+<% if can? :create, book%>
+<%= link_to "New book", new_book_path %>
+
+):
+1:    
+2:    
+3:    <h1>Books</h1>
+4:    
+5:    <div id="books">
+6:      <% @books.each do |book| %>
+7:        <%= render book %>
+8:    
+9:        <td>
+10:          <% if can? :update, book%>
+11:          <%= link_to "Edit" ,  edit_book_path(book) %>
+12:          <% end %>
+13:        </td>
+14:    
+15:        <td>
+16:          <% if can? :destory, book%>
+17:          <%= link_to "Destroy" ,  method: :delete,
+18:          data:{ confirm: "are you sure? "} %>
+19:          <% end %>
+20:        </td>
+21:        <p>
+22:          <%= link_to "Show this book", book %>
+23:        </p>
+24:      <% end %>
+25:    </div>
+26:    <% if can? :create, book%>
+27:    <%= link_to "New book", new_book_path %>
+  
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/books/index.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:53:58 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.3ms | Allocations: 2770)
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.4ms | Allocations: 727)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.1ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 1.8ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 85.3ms | Allocations: 35306)
+  Rendered layout layouts/application.html.erb (Duration: 86.4ms | Allocations: 35416)
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 0.9ms | Allocations: 37888)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `book' for #<ActionView::Base:0x0000000000d520>
+
+'.freeze; if can? :create, book
+                           ^^^^
+Did you mean?  @books):
+    23:     </p>
+    24:   <% end %>
+    25: </div>
+    26: <% if can? :create, book%>
+    27: <%= link_to "New book", new_book_path %>
+    28: <%end%>
+  
+app/views/books/index.html.erb:26
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:54:29 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.9ms | Allocations: 1092)
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.5ms | Allocations: 716)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.8ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.2ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 24.4ms | Allocations: 16425)
+  Rendered layout layouts/application.html.erb (Duration: 25.5ms | Allocations: 16535)
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.7ms | Allocations: 18899)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `book' for #<ActionView::Base:0x0000000000d6d8>
+
+'.freeze; if can? :create, book 
+                           ^^^^
+Did you mean?  @books):
+    23:     </p>
+    24:   <% end %>
+    25: </div>
+    26: <% if can? :create, book %>
+    27: <%= link_to "New book", new_book_path %>
+    28: <%end%>
+  
+app/views/books/index.html.erb:26
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:54:52 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.4ms | Allocations: 1092)
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.7ms | Allocations: 716)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.8ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 2.8ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 31.3ms | Allocations: 6354)
+  Rendered layout layouts/application.html.erb (Duration: 91.6ms | Allocations: 21456)
+Completed 200 OK in 111ms (Views: 100.5ms | ActiveRecord: 1.4ms | Allocations: 23881)
+
+
+Started GET "/books/1" for 127.0.0.1 at 2022-07-02 00:54:54 +0200
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 4.1ms | Allocations: 758)
+  Rendered books/show.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1410)
+  Rendered layout layouts/application.html.erb (Duration: 19.4ms | Allocations: 3909)
+Completed 200 OK in 35ms (Views: 21.4ms | ActiveRecord: 1.0ms | Allocations: 6932)
+
+
+Started GET "/books/1/edit" for 127.0.0.1 at 2022-07-02 00:54:56 +0200
+Processing by BooksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 16ms (ActiveRecord: 0.7ms | Allocations: 3462)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:54:56 +0200
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/books/index.html.erb:6
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.7ms | Allocations: 761)
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `admin?'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.3ms | Allocations: 716)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.0ms | Allocations: 763)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/books/_book.html.erb:24
+  Rendered books/_book.html.erb (Duration: 3.1ms | Allocations: 716)
+  Rendered books/index.html.erb within layouts/application (Duration: 25.2ms | Allocations: 5360)
+  Rendered layout layouts/application.html.erb (Duration: 36.5ms | Allocations: 7887)
+Completed 200 OK in 45ms (Views: 37.3ms | ActiveRecord: 1.1ms | Allocations: 9610)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-02 00:55:07 +0200
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 0.3ms | Allocations: 24420)
+
+
+  
+NameError (undefined local variable or method `devise_parameters_sanitizer' for #<Devise::SessionsController:0x0000000000d96c>
+
+        devise_parameters_sanitizer.permit(:sign_up, keys: [:name])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  devise_parameter_sanitizer):
+  
+app/controllers/application_controller.rb:8:in `configure_permitted_parameters'
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-02 00:55:15 +0200
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 0.3ms | Allocations: 24054)
+
+
+  
+NameError (undefined local variable or method `devise_parameters_sanitizer' for #<Devise::SessionsController:0x0000000000db24>
+
+        devise_parameters_sanitizer.permit(:sign_up, keys: [:name])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  devise_parameter_sanitizer):
+  
+app/controllers/application_controller.rb:8:in `configure_permitted_parameters'
+Started GET "/users/sign_out" for 127.0.0.1 at 2022-07-02 00:58:16 +0200
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:13:in `assign_role'
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:13:in `assign_role'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 27ms (ActiveRecord: 1.5ms | Allocations: 14558)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-02 00:58:17 +0200
+Processing by BooksController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 636)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-02 00:58:18 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.2ms | Allocations: 885)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 12.2ms | Allocations: 4276)
+  Rendered layout layouts/application.html.erb (Duration: 43.3ms | Allocations: 18942)
+Completed 200 OK in 51ms (Views: 49.5ms | ActiveRecord: 0.0ms | Allocations: 20500)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:03:02 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sally@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 649ms (ActiveRecord: 0.4ms | Allocations: 29279)
+
+
+  
+NoMethodError (undefined method `current_sign_in_at' for #<User id: 1, name: "Sally", role_id: 1, created_at: "2022-07-01 20:04:28.736449000 +0000", updated_at: "2022-07-01 20:04:28.736449000 +0000", email: "sally@example.com">):
+  
+activemodel (7.0.3) lib/active_model/attribute_methods.rb:458:in `method_missing'
+devise (4.8.1) lib/devise/models/trackable.rb:21:in `update_tracked_fields'
+devise (4.8.1) lib/devise/models/trackable.rb:39:in `update_tracked_fields!'
+devise (4.8.1) lib/devise/hooks/trackable.rb:9:in `block in <main>'
+warden (1.2.9) lib/warden/hooks.rb:15:in `block in _run_callbacks'
+warden (1.2.9) lib/warden/hooks.rb:10:in `each'
+warden (1.2.9) lib/warden/hooks.rb:10:in `_run_callbacks'
+warden (1.2.9) lib/warden/manager.rb:52:in `_run_callbacks'
+warden (1.2.9) lib/warden/proxy.rb:191:in `set_user'
+warden (1.2.9) lib/warden/proxy.rb:339:in `_perform_authentication'
+warden (1.2.9) lib/warden/proxy.rb:133:in `authenticate!'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:19:in `create'
+actionpack (7.0.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rendering.rb:53:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.3) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (7.0.3) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.3) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3.1) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.3.1) lib/rack/etag.rb:27:in `call'
+rack (2.2.3.1) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3.1) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3.1) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3.1) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:03:16 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.3ms | Allocations: 680)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 9.8ms | Allocations: 2518)
+  Rendered layout layouts/application.html.erb (Duration: 23.7ms | Allocations: 5752)
+Completed 200 OK in 45ms (Views: 39.5ms | ActiveRecord: 0.0ms | Allocations: 7251)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:03:19 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sally@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 637ms (ActiveRecord: 0.4ms | Allocations: 27846)
+
+
+  
+NoMethodError (undefined method `current_sign_in_at' for #<User id: 1, name: "Sally", role_id: 1, created_at: "2022-07-01 20:04:28.736449000 +0000", updated_at: "2022-07-01 20:04:28.736449000 +0000", email: "sally@example.com">):
+  
+activemodel (7.0.3) lib/active_model/attribute_methods.rb:458:in `method_missing'
+devise (4.8.1) lib/devise/models/trackable.rb:21:in `update_tracked_fields'
+devise (4.8.1) lib/devise/models/trackable.rb:39:in `update_tracked_fields!'
+devise (4.8.1) lib/devise/hooks/trackable.rb:9:in `block in <main>'
+warden (1.2.9) lib/warden/hooks.rb:15:in `block in _run_callbacks'
+warden (1.2.9) lib/warden/hooks.rb:10:in `each'
+warden (1.2.9) lib/warden/hooks.rb:10:in `_run_callbacks'
+warden (1.2.9) lib/warden/manager.rb:52:in `_run_callbacks'
+warden (1.2.9) lib/warden/proxy.rb:191:in `set_user'
+warden (1.2.9) lib/warden/proxy.rb:339:in `_perform_authentication'
+warden (1.2.9) lib/warden/proxy.rb:133:in `authenticate!'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:19:in `create'
+actionpack (7.0.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rendering.rb:53:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.3) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (7.0.3) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.3) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3.1) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.3.1) lib/rack/etag.rb:27:in `call'
+rack (2.2.3.1) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3.1) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3.1) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3.1) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/books/1" for 127.0.0.1 at 2022-07-02 01:04:52 +0200
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:66:in `set_book'
+Completed 401 Unauthorized in 180ms (ActiveRecord: 2.1ms | Allocations: 13976)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:04:52 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 151)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1374)
+  Rendered layout layouts/application.html.erb (Duration: 20.9ms | Allocations: 4023)
+Completed 200 OK in 27ms (Views: 23.9ms | ActiveRecord: 0.0ms | Allocations: 4832)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:05:07 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sally@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sally@example.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 222ms (ActiveRecord: 0.1ms | Allocations: 27696)
+
+
+  
+NoMethodError (undefined method `current_sign_in_at' for #<User id: 1, name: "Sally", role_id: 1, created_at: "2022-07-01 20:04:28.736449000 +0000", updated_at: "2022-07-01 20:04:28.736449000 +0000", email: "sally@example.com">):
+  
+activemodel (7.0.3) lib/active_model/attribute_methods.rb:458:in `method_missing'
+devise (4.8.1) lib/devise/models/trackable.rb:21:in `update_tracked_fields'
+devise (4.8.1) lib/devise/models/trackable.rb:39:in `update_tracked_fields!'
+devise (4.8.1) lib/devise/hooks/trackable.rb:9:in `block in <main>'
+warden (1.2.9) lib/warden/hooks.rb:15:in `block in _run_callbacks'
+warden (1.2.9) lib/warden/hooks.rb:10:in `each'
+warden (1.2.9) lib/warden/hooks.rb:10:in `_run_callbacks'
+warden (1.2.9) lib/warden/manager.rb:52:in `_run_callbacks'
+warden (1.2.9) lib/warden/proxy.rb:191:in `set_user'
+warden (1.2.9) lib/warden/proxy.rb:339:in `_perform_authentication'
+warden (1.2.9) lib/warden/proxy.rb:133:in `authenticate!'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:19:in `create'
+actionpack (7.0.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rendering.rb:53:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.3) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (7.0.3) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.3) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3.1) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.3.1) lib/rack/etag.rb:27:in `call'
+rack (2.2.3.1) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3.1) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3.1) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3.1) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-07-02 01:12:07 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"sue@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "sue@example.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 214ms (ActiveRecord: 0.7ms | Allocations: 28708)
+
+
+  
+NoMethodError (undefined method `current_sign_in_at' for #<User id: 2, name: "Sue", role_id: 2, created_at: "2022-07-01 20:04:29.049707000 +0000", updated_at: "2022-07-01 20:04:29.049707000 +0000", email: "sue@example.com">):
+  
+activemodel (7.0.3) lib/active_model/attribute_methods.rb:458:in `method_missing'
+devise (4.8.1) lib/devise/models/trackable.rb:21:in `update_tracked_fields'
+devise (4.8.1) lib/devise/models/trackable.rb:39:in `update_tracked_fields!'
+devise (4.8.1) lib/devise/hooks/trackable.rb:9:in `block in <main>'
+warden (1.2.9) lib/warden/hooks.rb:15:in `block in _run_callbacks'
+warden (1.2.9) lib/warden/hooks.rb:10:in `each'
+warden (1.2.9) lib/warden/hooks.rb:10:in `_run_callbacks'
+warden (1.2.9) lib/warden/manager.rb:52:in `_run_callbacks'
+warden (1.2.9) lib/warden/proxy.rb:191:in `set_user'
+warden (1.2.9) lib/warden/proxy.rb:339:in `_perform_authentication'
+warden (1.2.9) lib/warden/proxy.rb:133:in `authenticate!'
+devise (4.8.1) app/controllers/devise/sessions_controller.rb:19:in `create'
+actionpack (7.0.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rendering.rb:53:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.3) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (7.0.3) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.3) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.3) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (7.0.3) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3.1) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.3.1) lib/rack/etag.rb:27:in `call'
+rack (2.2.3.1) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3.1) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3.1) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3.1) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3.1) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-02 03:30:23 +0200
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.0ms | Allocations: 317)
+  Rendered devise/shared/_links.html.erb (Duration: 1.6ms | Allocations: 766)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 41.3ms | Allocations: 6691)
+  Rendered layout layouts/application.html.erb (Duration: 176.8ms | Allocations: 44435)
+Completed 200 OK in 218ms (Views: 194.2ms | ActiveRecord: 0.7ms | Allocations: 56305)
+
+
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:46:33 +0200
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/admin"):
+  
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:46:38 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/admin"):
+  
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:48:08 +0200
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/admin"):
+  
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:49:57 +0200
+  
+ActionController::RoutingError (uninitialized constant AdminController
+
+      Object.const_get(camel_cased_word)
+            ^^^^^^^^^^
+Did you mean?  ActionController
+
+            raise MissingController.new(error.message, error.name)
+            ^^^^^):
+  
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:54:18 +0200
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant AdminController
+
+      Object.const_get(camel_cased_word)
+            ^^^^^^^^^^
+Did you mean?  ActionController
+
+            raise MissingController.new(error.message, error.name)
+            ^^^^^):
+  
+Started GET "/admin" for 127.0.0.1 at 2022-07-02 03:54:38 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/admin"):
+  
+Started GET "/y" for 127.0.0.1 at 2022-07-02 03:54:54 +0200
+Processing by RailsAdmin::MainController#dashboard as HTML
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mBook Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "books"[0m
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" ORDER BY "books"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mRole Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "roles"[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" ORDER BY "roles"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendering layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/dashboard.html.erb within layouts/rails_admin/application
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/dashboard.html.erb within layouts/rails_admin/application (Duration: 19.3ms | Allocations: 7753)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_head.html.erb (Duration: 4108.0ms | Allocations: 330460)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_secondary_navigation.html.erb (Duration: 2.5ms | Allocations: 866)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_navigation.html.erb (Duration: 8.6ms | Allocations: 1422)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_sidebar_navigation.html.erb (Duration: 3.6ms | Allocations: 1277)
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb (Duration: 3.5ms | Allocations: 1084)
+  Rendered layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb (Duration: 4165.9ms | Allocations: 343470)
+Completed 200 OK in 6083ms (Views: 4183.3ms | ActiveRecord: 8.9ms | Allocations: 463029)
+
+
+Started GET "/y/user" for 127.0.0.1 at 2022-07-02 03:56:06 +0200
+Processing by RailsAdmin::MainController#index as HTML
+  Parameters: {"model_name"=>"user"}
+  Rendering layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/index.html.erb within layouts/rails_admin/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY users.id desc LIMIT ? OFFSET ?[0m  [["LIMIT", 20], ["OFFSET", 0]]
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2]]
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = ?[0m  [["user_id", 5]]
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[36mBook Load (16.6ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/index.html.erb within layouts/rails_admin/application (Duration: 509.3ms | Allocations: 71292)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_head.html.erb (Duration: 108.3ms | Allocations: 22973)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_secondary_navigation.html.erb (Duration: 1.1ms | Allocations: 337)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_navigation.html.erb (Duration: 2.5ms | Allocations: 539)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_sidebar_navigation.html.erb (Duration: 1.7ms | Allocations: 1022)
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb (Duration: 4.7ms | Allocations: 2304)
+  Rendered layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb (Duration: 634.5ms | Allocations: 98894)
+Completed 200 OK in 648ms (Views: 621.2ms | ActiveRecord: 19.3ms | Allocations: 101332)
+
+
+Started GET "/y/user/new" for 127.0.0.1 at 2022-07-02 03:56:09 +0200
+Processing by RailsAdmin::MainController#new as HTML
+  Parameters: {"model_name"=>"user"}
+  Rendering layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/new.html.erb within layouts/rails_admin/application
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_field.html.erb (Duration: 1.3ms | Allocations: 405)
+  [1m[36mRole Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "roles"[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" ORDER BY roles.id desc[0m
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_filtering_select.html.erb (Duration: 76.8ms | Allocations: 6014)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_field.html.erb (Duration: 0.5ms | Allocations: 187)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_field.html.erb (Duration: 3.2ms | Allocations: 374)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_field.html.erb (Duration: 0.3ms | Allocations: 182)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_datetime.html.erb (Duration: 1.7ms | Allocations: 617)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_datetime.html.erb (Duration: 0.6ms | Allocations: 335)
+  [1m[36mBook Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "books"[0m
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" ORDER BY books.id desc[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?)[0m  [["id", 3], ["id", 2]]
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_form_filtering_multiselect.html.erb (Duration: 30.3ms | Allocations: 7995)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/_submit_buttons.html.erb (Duration: 2.6ms | Allocations: 982)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/rails_admin/main/new.html.erb within layouts/rails_admin/application (Duration: 159.4ms | Allocations: 24045)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_head.html.erb (Duration: 107.9ms | Allocations: 22966)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_secondary_navigation.html.erb (Duration: 0.9ms | Allocations: 354)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_navigation.html.erb (Duration: 2.7ms | Allocations: 548)
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/_sidebar_navigation.html.erb (Duration: 3.0ms | Allocations: 1026)
+  Rendering C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb
+  Rendered C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/content.html.erb (Duration: 7.6ms | Allocations: 2581)
+  Rendered layout C:/Ruby31/lib/ruby/gems/3.1.0/gems/rails_admin-3.0.0/app/views/layouts/rails_admin/application.html.erb (Duration: 289.4ms | Allocations: 51910)
+Completed 200 OK in 300ms (Views: 293.2ms | ActiveRecord: 2.2ms | Allocations: 52981)
+
+
